@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>✨ Happy Birthday Hảo Hảo | A Cinematic Wish ✨</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none; /* for a cleaner cinematic feel */
+  }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(145deg, #1a0b1a 0%, #2d1b2e 100%);
+    font-family: 'Poppins', 'Segoe UI', 'Dancing Script', cursive, sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* elegant animated gradient overlay */
+  .ambient-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 30%, rgba(255, 180, 200, 0.25), rgba(20, 5, 25, 0.7));
+    pointer-events: none;
+    z-index: 0;
+    animation: breatheGlow 8s ease-in-out infinite;
+  }
+
+  @keyframes breatheGlow {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+  }
+
+  /* floating particles romantic */
+  .floating-particle {
+    position: fixed;
+    background: radial-gradient(circle, #ffb7c5, #ff6a88);
+    border-radius: 50%;
+    filter: blur(3px);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+    animation: floatParticle linear infinite;
+  }
+
+  @keyframes floatParticle {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+  }
+
+  /* main container cinematic */
+  .cinema-container {
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    max-width: 700px;
+    margin: 2rem auto;
+    backdrop-filter: blur(2px);
+  }
+
+  /* card style with luxury feel */
+  .story-card {
+    background: rgba(20, 12, 28, 0.55);
+    backdrop-filter: blur(12px);
+    border-radius: 64px;
+    padding: 2rem 2rem;
+    border: 1px solid rgba(255, 210, 220, 0.5);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,200,0.1) inset;
+    transition: all 0.4s ease;
+    text-align: center;
+  }
+
+  .story-text {
+    font-size: 2rem;
+    font-weight: 500;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, #ffe6f0, #ffcddf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: 'Dancing Script', cursive;
+    padding: 0.5rem;
+  }
+
+  .btn-next {
+    margin-top: 25px;
+    padding: 14px 38px;
+    border-radius: 60px;
+    background: linear-gradient(95deg, #ff8a9f, #ff4d6d);
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Segoe UI', sans-serif;
+    backdrop-filter: blur(4px);
+  }
+
+  .btn-next:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(255, 77, 109, 0.6);
+  }
+
+  /* popup cinema (premium reveal) */
+  .cinema-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(16px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 200;
+    animation: fadeInPopup 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  }
+
+  @keyframes fadeInPopup {
+    from { opacity: 0; backdrop-filter: blur(0px); }
+    to { opacity: 1; backdrop-filter: blur(16px); }
+  }
+
+  .polaroid-frame {
+    background: rgba(255, 245, 240, 0.95);
+    padding: 18px 18px 35px 18px;
+    border-radius: 28px;
+    box-shadow: 0 35px 45px rgba(0,0,0,0.5), 0 0 0 3px #fff8, 0 0 0 6px #ffb7c5;
+    transform: rotate(0deg);
+    transition: transform 0.3s;
+    max-width: 340px;
+  }
+
+  .cinema-popup img {
+    width: 280px;
+    height: auto;
+    border-radius: 18px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transition: all 0.4s;
+  }
+
+  .cinema-popup img:hover {
+    transform: scale(1.02);
+    filter: brightness(1.05);
+  }
+
+  .romantic-message {
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(12px);
+    margin-top: 40px;
+    padding: 30px 35px;
+    border-radius: 60px;
+    max-width: 85%;
+    text-align: center;
+    font-size: 1.35rem;
+    line-height: 1.6;
+    color: #fff5e6;
+    font-weight: 400;
+    border: 1px solid #ffb7c5;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+    font-family: 'Segoe UI', 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  .romantic-message span {
+    display: inline-block;
+    animation: gentlePop 0.4s ease;
+  }
+
+  @keyframes gentlePop {
+    0% { opacity: 0; transform: translateY(12px);}
+    100% { opacity: 1; transform: translateY(0);}
+  }
+
+  /* romantic hearts system - elegant */
+  .elegant-heart {
+    position: fixed;
+    pointer-events: none;
+    font-size: 0;
+    z-index: 99;
+    filter: drop-shadow(0 0 4px #ff99aa);
+    animation: floatHeartRomance 4s ease-out forwards;
+  }
+
+  @keyframes floatHeartRomance {
+    0% {
+      transform: translateY(0) scale(0.3);
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.9;
+      transform: translateY(-20px) scale(0.8);
+    }
+    80% {
+      opacity: 0.8;
+      transform: translateY(-120px) scale(1);
+    }
+    100% {
+      transform: translateY(-220px) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  /* sparkling stars */
+  .star-twinkle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 20px;
+    z-index: 95;
+    animation: twinkleStar 1.6s ease-out forwards;
+  }
+
+  @keyframes twinkleStar {
+    0% { opacity: 1; transform: scale(0.2) rotate(0deg);}
+    50% { opacity: 1; transform: scale(1.2) rotate(25deg);}
+    100% { opacity: 0; transform: scale(0) rotate(60deg);}
+  }
+
+  /* musical note hint */
+  .music-hint {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 12px;
+    color: #ffcfcf;
+    font-family: monospace;
+    z-index: 200;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 550px) {
+    .story-text { font-size: 1.6rem; min-height: 130px; }
+    .btn-next { padding: 10px 28px; font-size: 1rem;}
+    .romantic-message { font-size: 1.1rem; padding: 20px 20px; }
+    .polaroid-frame img { width: 220px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-glow"></div>
+<div class="cinema-container">
+  <div class="story-card">
+    <div class="story-text" id="storyText"></div>
+    <button class="btn-next" id="nextBtn">✨ Tiếp tục ✨</button>
+  </div>
+</div>
+
+<div class="cinema-popup" id="cinemaPopup">
+  <div class="polaroid-frame">
+    <img id="birthdayImage" src="https://placehold.co/400x500/ffccd5/ff4d6d?text=🌸+Hảo+Hảo+🌸" alt="Hảo Hảo Birthday">
+  </div>
+  <div class="romantic-message" id="finalRomanticMsg"></div>
+</div>
+
+<div class="music-hint" id="musicHint">🎵 nhạc nền lãng mạn • click để cảm nhận</div>
+
+<audio id="bgMelody" loop preload="auto">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  // Enhanced romantic story lines (cinematic)
+  const storySequence = [
+    "✨ Hôm nay ánh trăng kể chuyện... ✨",
+    "🌸 Có một người tên 'Hảo Hảo' – nhẹ như mây trời 🌸",
+    "🍃 Dễ thương theo cách rất riêng, đôi khi lạnh lùng... nhưng tim ấm áp 🍃",
+    "🌙 Ngủ sớm, sống khoa học – mà vẫn khiến ai đó thao thức 🌙",
+    "💫 Và biết không? Sự lạnh lùng ấy lại lung linh hơn cả ngàn vì sao 💫",
+    "🍂 Nên hôm nay, vì một người đặc biệt... 🍂",
+    "🎀 Một điều bất ngờ được tạo nên từ tất cả rung động 🎀",
+    "🥺 Chỉ dành riêng cho bạn... người khiến trái tim này 'hỏng' mất rồi 🥺"
+  ];
+
+  let stepIdx = 0;
+  let isTyping = false;
+  let typeInterval = null;
+
+  const storyElement = document.getElementById("storyText");
+  const nextBtn = document.getElementById("nextBtn");
+  const popup = document.getElementById("cinemaPopup");
+  const finalMsgDiv = document.getElementById("finalRomanticMsg");
+  const bgMusic = document.getElementById("bgMelody");
+  const birthdayImg = document.getElementById("birthdayImage");
+
+  // set a romantic placeholder image (we'll use a beautiful dataURL or gradient? But we use external placeholder but change to lovely style)
+  // To make it more professional, i will set an elegant svg/canvas-like style? but we can create an elegant romantic drawing base64?
+  // To ensure image shows romantic vibe: we will set a data url with cute birthday cake & heart
+  const romanticImageData = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23ffe4e8'/%3E%3Ccircle cx='200' cy='180' r='80' fill='%23ffb3c6'/%3E%3Ctext x='200' y='190' font-size='45' text-anchor='middle' fill='%23ffffff' font-family='monospace'%3E🎂%3C/text%3E%3Ctext x='200' y='280' font-size='28' text-anchor='middle' fill='%23ff6b8b' font-weight='bold'%3EHảo Hảo%3C/text%3E%3Ctext x='200' y='330' font-size='22' text-anchor='middle' fill='%23b34e6e'%3E✨ Happy Birthday ✨%3C/text%3E%3Cpath d='M130 380 L200 430 L270 380 L240 360 L200 390 L160 360 Z' fill='%23ff85a1'/%3E%3C/svg%3E";
+  birthdayImg.src = romanticImageData;
+
+  // elegant typing effect
+  function typeRomanticText(text, element, speed = 45, callback) {
+    if (typeInterval) clearInterval(typeInterval);
+    element.innerHTML = "";
+    let idxChar = 0;
+    isTyping = true;
+    function addChar() {
+      if (idxChar < text.length) {
+        element.innerHTML += text[idxChar];
+        idxChar++;
+      } else {
+        clearInterval(typeInterval);
+        isTyping = false;
+        if (callback) callback();
+      }
+    }
+    typeInterval = setInterval(addChar, speed);
+  }
+
+  function loadStoryStep(step) {
+    if (step < storySequence.length) {
+      typeRomanticText(storySequence[step], storyElement, 42, null);
+    }
+  }
+
+  loadStoryStep(0);
+
+  // --- Create romantic particles (floating dust & stars) continuously ---
+  function createRomanticParticles() {
+    setInterval(() => {
+      const particle = document.createElement('div');
+      particle.className = 'floating-particle';
+      const size = Math.random() * 8 + 3;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDuration = Math.random() * 5 + 4 + 's';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 7000);
+    }, 350);
+  }
+
+  // beautiful heart rain with custom shapes
+  function createElegantHeart() {
+    const heartContainer = document.createElement('div');
+    heartContainer.className = 'elegant-heart';
+    const heartIcon = ['💖', '💗', '💕', '💓', '🌸', '✨', '💞'][Math.floor(Math.random() * 7)];
+    heartContainer.innerHTML = heartIcon;
+    heartContainer.style.left = Math.random() * 100 + '%';
+    heartContainer.style.fontSize = (Math.random() * 28 + 18) + 'px';
+    heartContainer.style.animationDuration = Math.random() * 3 + 3.5 + 's';
+    heartContainer.style.opacity = 0.9;
+    document.body.appendChild(heartContainer);
+    setTimeout(() => heartContainer.remove(), 4200);
+  }
+
+  function startRomanticEffects() {
+    setInterval(() => {
+      if (popup.style.display !== 'flex') {
+        createElegantHeart();
+      } else {
+        // more hearts when popup shows
+        for(let i=0;i<2;i++) createElegantHeart();
+      }
+    }, 380);
+    setInterval(() => {
+      const star = document.createElement('div');
+      star.className = 'star-twinkle';
+      star.innerHTML = ['✨', '⭐', '🌟', '💫'][Math.floor(Math.random()*4)];
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 80 + '%';
+      star.style.fontSize = (Math.random() * 25 + 12) + 'px';
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 1600);
+    }, 500);
+  }
+
+  createRomanticParticles();
+  startRomanticEffects();
+
+  // Background music autoplay policy: first user interaction
+  let musicStarted = false;
+  function startMusic() {
+    if (!musicStarted) {
+      bgMusic.volume = 0.5;
+      bgMusic.play().then(() => {
+        musicStarted = true;
+        const hint = document.getElementById('musicHint');
+        if(hint) hint.style.opacity = '0.6';
+      }).catch(e => console.log("autoplay blocked, but ready"));
+    }
+  }
+  document.body.addEventListener('click', startMusic, { once: true });
+  nextBtn.addEventListener('click', startMusic);
+
+  // sophisticated next step + final cinematic reveal
+  function nextStoryStep() {
+    if (isTyping) return;
+    if (stepIdx + 1 < storySequence.length) {
+      stepIdx++;
+      loadStoryStep(stepIdx);
+    } else if (stepIdx + 1 === storySequence.length) {
+      // Final cinematic showtime
+      stepIdx++;
+      revealCinematicBirthday();
+    }
+  }
+
+  function revealCinematicBirthday() {
+    // Show popup with glamour
+    popup.style.display = 'flex';
+    // additional effect: stop story typing if any
+    if (typeInterval) clearInterval(typeInterval);
+    
+    // enhanced music fade in if not started
+    if (!musicStarted) {
+      bgMusic.volume = 0.4;
+      bgMusic.play().catch(()=>{});
+      musicStarted = true;
+    } else {
+      // make sure music continues
+      bgMusic.volume = 0.5;
+      bgMusic.play();
+    }
+    
+    // final romantic messages sequence (more emotional)
+    const finalMessages = [
+      "🎀 Happy Birthday, Hảo Hảo! 🎀",
+      "🌷 Thêm một mùa hoa, thêm một mùa yêu thương... 🌷",
+      "❄️ Người lạnh lùng nhưng trái tim lại ấm áp đến lạ ❄️",
+      "🍂 Mỗi dòng code này đều viết bằng nỗi nhớ và sự rung động 🍂",
+      "✨ 'Cậu khiến tôi nhận ra, lạnh lùng cũng là một kiểu dịu dàng' ✨",
+      "🌸 Chúc cậu luôn xinh đẹp, bình yên và hạnh phúc rạng ngời 🌸",
+      "💖 Và biết không? Người tạo ra điều này...",
+      "💘 để ý cậu nhiều lắm, nhiều hơn cả ngàn vì sao 💘",
+      "🎂 Chúc mừng sinh nhật, công chúa lạnh lùng 🎂"
+    ];
+    
+    let msgIndex = 0;
+    finalMsgDiv.innerHTML = "";
+    
+    function appendNextMessage() {
+      if (msgIndex < finalMessages.length) {
+        const p = document.createElement("div");
+        p.style.opacity = "0";
+        p.style.transform = "translateY(12px)";
+        p.style.transition = "all 0.4s ease";
+        p.style.marginBottom = "15px";
+        p.innerHTML = finalMessages[msgIndex];
+        finalMsgDiv.appendChild(p);
+        setTimeout(() => {
+          p.style.opacity = "1";
+          p.style.transform = "translateY(0)";
+        }, 30);
+        msgIndex++;
+        setTimeout(appendNextMessage, 720);
+      } else {
+        // after all messages, create floating special calligraphy heart storm
+        for(let i=0;i<28;i++) {
+          setTimeout(() => {
+            createElegantHeart();
+            const extraSpark = document.createElement('div');
+            extraSpark.className = 'star-twinkle';
+            extraSpark.innerHTML = '🎈';
+            extraSpark.style.left = Math.random() * 100 + '%';
+            extraSpark.style.fontSize = '28px';
+            document.body.appendChild(extraSpark);
+            setTimeout(()=>extraSpark.remove(),1500);
+          }, i*100);
+        }
+      }
+    }
+    appendNextMessage();
+    
+    // also animate image with gentle floating
+    const imgElement = popup.querySelector('img');
+    if(imgElement) {
+      imgElement.style.animation = 'gentleFloat 3s infinite ease-in-out';
+    }
+    const styleAnim = document.createElement('style');
+    styleAnim.textContent = `@keyframes gentleFloat { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }`;
+    document.head.appendChild(styleAnim);
+    
+    // add a romantic click to close? No, but we can add a subtle close button? For elegance we don't need close, but we'll let user enjoy. Add a little note to click anywhere but not needed. 
+    // but we can add a floating hint "💌 chạm để cảm nhâm" but it's fine.
+  }
+
+  nextBtn.addEventListener('click', nextStoryStep);
+
+  // preload extra glamorous background: animated rose petals style? but fine, we also implement dynamic gradient based on cursor? 
+  // advanced romantic background parallax? Let's add a mouse movement reflection effect
+  document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+    document.body.style.background = `radial-gradient(circle at ${x}% ${y}%, #2a142e, #110b16)`;
+  });
+  
+  // additional initial style for body
+  document.body.style.background = "radial-gradient(circle at 50% 30%, #2a142e, #0e0812)";
+  document.body.style.transition = "background 0.2s ease";
+  
+  // optional: add a subtle "click anywhere" music reminder
+  const musicReminder = document.createElement('div');
+  musicReminder.innerText = "🎧 tap nhẹ để nghe nhạc nền lãng mạn 🎧";
+  musicReminder.style.position = "fixed";
+  musicReminder.style.bottom = "15px";
+  musicReminder.style.left = "15px";
+  musicReminder.style.fontSize = "11px";
+  musicReminder.style.background = "rgba(0,0,0,0.4)";
+  musicReminder.style.backdropFilter = "blur(5px)";
+  musicReminder.style.padding = "5px 12px";
+  musicReminder.style.borderRadius = "50px";
+  musicReminder.style.color = "#ffcfdf";
+  musicReminder.style.zIndex = "200";
+  musicReminder.style.fontFamily = "sans-serif";
+  document.body.appendChild(musicReminder);
+  musicReminder.addEventListener('click', startMusic);
+  
+  // if popup shows, we could also add a sweet message click effect
+  popup.addEventListener('click', () => {
+    // just extra heartbeat effect
+    for(let i=0;i<6;i++) setTimeout(()=>createElegantHeart(), i*70);
+  });
+  
+  // ensure fallback for image on error (already has svg)
+  birthdayImg.onerror = () => { birthdayImg.src = romanticImageData; };
+  
+  // Additional sparkles that follow clicks? very romantic
+  document.addEventListener('click', (e) => {
+    for(let i=0;i<3;i++) {
+      const spark = document.createElement('div');
+      spark.className = 'star-twinkle';
+      spark.innerHTML = '💖';
+      spark.style.left = (e.clientX + (Math.random()*30 -15)) + 'px';
+      spark.style.top = (e.clientY + (Math.random()*30 -15)) + 'px';
+      spark.style.position = 'fixed';
+      spark.style.pointerEvents = 'none';
+      spark.style.fontSize = '22px';
+      document.body.appendChild(spark);
+      setTimeout(()=>spark.remove(), 800);
+    }
+  });
+</script>
+</body>
+</html>
