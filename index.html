@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>✨ Happy Birthday Như Hảo | Nothing's Gonna Change My Love ✨</title>
 
 <style>
@@ -205,6 +205,38 @@
     75% { transform: translateY(-50%) rotate(-10deg); }
   }
 
+  /* NÚT BẬT NHẠC CHO MOBILE */
+  .music-activator {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff4d6d, #ff8a9f);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 60px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    z-index: 300;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(255,77,109,0.6);
+    animation: bounce 1s infinite;
+    border: none;
+    font-family: 'Segoe UI', sans-serif;
+    letter-spacing: 1px;
+    backdrop-filter: blur(8px);
+    white-space: nowrap;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+  }
+  
+  .music-activator.hidden {
+    display: none;
+  }
+
   .cinema-popup {
     position: fixed;
     top: 0;
@@ -314,15 +346,19 @@
     .polaroid-frame img { width: 220px; }
     .countdown-number { font-size: 1.8rem; }
     .countdown-unit { min-width: 55px; }
+    .music-activator { padding: 12px 24px; font-size: 1rem; white-space: nowrap; }
   }
 </style>
 </head>
 <body>
 
 <div class="ambient-glow"></div>
+
+<!-- NÚT BẬT NHẠC CHO MOBILE (RẤT NỔI BẬT) -->
+<button class="music-activator" id="musicActivatorBtn">🎵 BẬT NHẠC NGAY 🎵</button>
+
 <div class="cinema-container">
   <div class="story-card">
-    <!-- COUNTDOWN TIMER - ĐẾM NGƯỢC TỚI 0H NGÀY 24/04 (GIỜ ĐÀI LOAN) -->
     <div class="countdown-container">
       <div class="countdown-title">🎂 CHÀO ĐÓN SINH NHẬT NHƯ HẢO 🎂</div>
       <div class="countdown-timer" id="countdownTimer">
@@ -343,7 +379,7 @@
           <div class="countdown-label">GIÂY</div>
         </div>
       </div>
-      <div class="birthday-badge" id="birthdayMessage">🎵 Nhạc đã được bật rồi nè! Chờ đến 0h 24/04 để mở tiếp nhé 🎵</div>
+      <div class="birthday-badge" id="birthdayMessage">🎵 Nhấn nút BẬT NHẠC bên dưới để nghe nhé! 🎵</div>
     </div>
     
     <div class="story-text" id="storyText"></div>
@@ -358,7 +394,7 @@
   <div class="romantic-message" id="finalRomanticMsg"></div>
 </div>
 
-<div class="music-hint" id="musicHint">🎵 Nothing's Gonna Change My Love For You • đang phát nhạc ngay 🎵</div>
+<div class="music-hint" id="musicHint">🎵 Chưa bật nhạc • Nhấn nút bên dưới 🎵</div>
 
 <audio id="bgMelody" loop preload="auto">
   <source src="nothing.mp3" type="audio/mpeg">
@@ -366,9 +402,8 @@
 
 <script>
   // ========== COUNTDOWN TIMER ==========
-  // Mốc thời gian: 00:00:00 ngày 24/04/2026 theo múi giờ Đài Loan (UTC+8)
   function getTaiwanBirthday() {
-    const taiwanOffset = 8; // UTC+8
+    const taiwanOffset = 8;
     const targetUTC = Date.UTC(2026, 3, 24, 0 - taiwanOffset, 0, 0);
     return new Date(targetUTC);
   }
@@ -379,13 +414,15 @@
   
   const nextBtn = document.getElementById("nextBtn");
   const storyElement = document.getElementById("storyText");
+  const musicActivatorBtn = document.getElementById("musicActivatorBtn");
+  const bgMusic = document.getElementById("bgMelody");
+  const musicHint = document.getElementById("musicHint");
   
-  // Story sequence (chỉ hiển thị sau khi mở khóa)
   const storySequence = [
     "✨ Hôm nay ánh trăng kể chuyện... ✨",
     "🌸 Có một người tên 'Như Hảo' – nhẹ như mây trời 🌸",
     "🍃 Dễ thương theo cách rất riêng, đôi khi lạnh lùng... nhưng tim ấm áp 🍃",
-    "🌙 NGỦ SỚM, SỐNG KHOA HỌC!!!   🌙",
+    "🌙 NGỦ SỚM, SỐNG KHOA HỌC !!! 🌙",
     "💫 Và biết không? Sự lạnh lùng ấy lại lung linh hơn cả ngàn vì sao 💫",
     "🍂 Nên hôm nay, vì một người đặc biệt... 🍂",
     "🎀 Một điều bất ngờ được tạo nên từ tất cả rung động 🎀",
@@ -395,6 +432,57 @@
   let stepIdx = 0;
   let isTyping = false;
   let typeInterval = null;
+  let musicStarted = false;
+  
+  // HÀM BẬT NHẠC (gọi khi người dùng click nút hoặc chạm màn hình)
+  function enableMusic() {
+    if (musicStarted) return true;
+    
+    bgMusic.volume = 0.5;
+    bgMusic.loop = true;
+    
+    return bgMusic.play().then(() => {
+      musicStarted = true;
+      musicHint.innerHTML = "🎵 Nothing's Gonna Change My Love For You • đang phát 🎵";
+      musicHint.style.background = "rgba(0,0,0,0.5)";
+      
+      // Ẩn nút bật nhạc
+      musicActivatorBtn.classList.add('hidden');
+      
+      // Đổi thông báo
+      const msgElem = document.getElementById('birthdayMessage');
+      if (!birthdayReached) {
+        msgElem.innerHTML = '🎵 Nhạc đang phát! Chờ đến 0h 24/04 để mở tiếp nhé 🎵';
+      }
+      
+      console.log("Nhạc đã được bật thành công!");
+      return true;
+    }).catch((error) => {
+      console.log("Không thể bật nhạc:", error);
+      musicHint.innerHTML = "🎵 🔇 Nhấn lại nút bên dưới để bật nhạc 🔇 🎵";
+      return false;
+    });
+  }
+  
+  // Xử lý nút bật nhạc
+  musicActivatorBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    enableMusic();
+  });
+  
+  // Tự động kích hoạt khi người dùng chạm bất kỳ đâu trên màn hình (cho mobile)
+  document.body.addEventListener("touchstart", () => {
+    if (!musicStarted) {
+      enableMusic();
+    }
+  }, { once: true });
+  
+  // Cho PC: click chuột cũng kích hoạt
+  document.body.addEventListener("click", () => {
+    if (!musicStarted) {
+      enableMusic();
+    }
+  }, { once: true });
   
   function typeRomanticText(text, element, speed = 42, callback) {
     if (typeInterval) clearInterval(typeInterval);
@@ -418,16 +506,12 @@
     if (storyUnlocked) return;
     storyUnlocked = true;
     
-    // Kích hoạt nút
     nextBtn.disabled = false;
     nextBtn.classList.remove('locked');
     nextBtn.classList.add('unlocked');
     nextBtn.innerHTML = '✨ Tiếp tục ✨ 🎉';
-    
-    // Bắt đầu câu chuyện
     loadStoryStep(0);
     
-    // Hiệu ứng đặc biệt
     for(let i = 0; i < 30; i++) {
       setTimeout(() => createElegantHeart(), i * 100);
     }
@@ -451,7 +535,6 @@
     const birthdayMsgElem = document.getElementById('birthdayMessage');
     
     if (diff <= 0 && !birthdayReached) {
-      // Đã đến sinh nhật - MỞ KHÓA!
       birthdayReached = true;
       if (countdownInterval) clearInterval(countdownInterval);
       
@@ -462,10 +545,8 @@
       birthdayMsgElem.innerHTML = '🎉✨ HÔM NAY LÀ SINH NHẬT NHƯ HẢO! ĐÃ ĐẾN LÚC MỞ QUÀ RỒI ✨🎉';
       birthdayMsgElem.style.animation = 'pulse 0.5s infinite';
       
-      // MỞ KHÓA NÚT TIẾP TỤC
       unlockStory();
       
-      // Tạo hiệu ứng đặc biệt
       for(let i = 0; i < 50; i++) {
         setTimeout(() => createElegantHeart(), i * 80);
         setTimeout(() => {
@@ -478,7 +559,6 @@
           setTimeout(() => star.remove(), 1500);
         }, i * 100);
       }
-      
       return;
     }
     
@@ -493,62 +573,24 @@
       minutesElem.textContent = String(minutes).padStart(2, '0');
       secondsElem.textContent = String(seconds).padStart(2, '0');
       
-      if (days === 0 && hours === 0 && minutes < 30) {
-        birthdayMsgElem.innerHTML = '💗 Sắp đến giờ G rồi! Sắp được mở rồi! Nhạc vẫn đang chạy nè 💗';
+      if (!birthdayReached && !musicStarted) {
+        birthdayMsgElem.innerHTML = '🎵 Nhấn nút BẬT NHẠC bên dưới để nghe nhé! 🎵';
+      } else if (days === 0 && hours === 0 && minutes < 30) {
+        birthdayMsgElem.innerHTML = '💗 Sắp đến giờ G rồi! Sắp được mở rồi! 💗';
       } else if (days === 0 && hours < 6) {
         birthdayMsgElem.innerHTML = '🌙 Chỉ còn vài giờ nữa thôi... Nghe nhạc chờ đợi nhé 🌙';
-      } else {
+      } else if (musicStarted) {
         birthdayMsgElem.innerHTML = '🎵 Nhạc đang phát! Đếm ngược tới khoảnh khắc có thể mở tiếp... 🎵';
       }
     }
   }
   
-  // Cập nhật countdown mỗi giây
   countdownInterval = setInterval(updateCountdown, 1000);
   updateCountdown();
   
-  // ========== PHẦN CODE GỐC ==========
+  // ========== HIỆU ỨNG ==========
   const popup = document.getElementById("cinemaPopup");
   const finalMsgDiv = document.getElementById("finalRomanticMsg");
-  const bgMusic = document.getElementById("bgMelody");
-  const musicHint = document.getElementById("musicHint");
-
-  bgMusic.volume = 0.5;
-  bgMusic.loop = true;
-  
-  let musicStarted = false;
-  
-  // PHÁT NHẠC NGAY LẬP TỨC (bất chấp chưa đến giờ)
-  function playMusicImmediately() {
-    bgMusic.play().then(() => {
-      musicStarted = true;
-      musicHint.innerHTML = "🎵 Nothing's Gonna Change My Love For You • đang phát nhạc ngay 🎵";
-      console.log("Nhạc đã được bật ngay khi vào web!");
-    }).catch((error) => {
-      console.log("Trình duyệt chặn autoplay:", error);
-      musicHint.innerHTML = "🎵 🔆 Nhấp vào màn hình để bật nhạc 🔆 🎵";
-      musicHint.style.cursor = "pointer";
-      
-      const enableMusic = () => {
-        if (!musicStarted) {
-          bgMusic.play().then(() => {
-            musicStarted = true;
-            musicHint.innerHTML = "🎵 Nothing's Gonna Change My Love For You • đang phát 🎵";
-            musicHint.style.background = "rgba(0,0,0,0.5)";
-            musicHint.style.cursor = "default";
-          }).catch(e => console.log("Still blocked"));
-        }
-        document.removeEventListener("click", enableMusic);
-        document.removeEventListener("touchstart", enableMusic);
-      };
-      
-      document.addEventListener("click", enableMusic);
-      document.addEventListener("touchstart", enableMusic);
-    });
-  }
-  
-  // Gọi ngay lập tức để phát nhạc
-  playMusicImmediately();
   
   function createRomanticParticles() {
     setInterval(() => {
@@ -597,15 +639,16 @@
   
   function nextStoryStep() {
     if (!storyUnlocked) {
-      // Thông báo nhẹ nhàng nếu cố gắng click khi chưa đến giờ
       const msg = document.getElementById('birthdayMessage');
       msg.style.animation = 'none';
       msg.offsetHeight;
       msg.style.animation = 'pulse 0.5s ease';
-      msg.innerHTML = '⏰ Chưa đến giờ đâu! Phải chờ đến 0h 24/04 mới mở được nè! Nhạc vẫn chạy mà đúng không? 🎵⏰';
+      msg.innerHTML = '⏰ Chưa đến giờ đâu! Phải chờ đến 0h 24/04 mới mở được nè! ⏰';
       setTimeout(() => {
-        if (!birthdayReached) {
+        if (!birthdayReached && musicStarted) {
           msg.innerHTML = '🎵 Nhạc đang phát! Đếm ngược tới khoảnh khắc có thể mở tiếp... 🎵';
+        } else if (!birthdayReached && !musicStarted) {
+          msg.innerHTML = '🎵 Nhấn nút BẬT NHẠC bên dưới để nghe nhé! 🎵';
         }
       }, 3000);
       return;
