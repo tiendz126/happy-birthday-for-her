@@ -419,15 +419,15 @@
   const musicHint = document.getElementById("musicHint");
   
   const storySequence = [
-    "✨ Hôm nay ánh trăng kể chuyện... ✨",
-    "🌸 Có một người tên 'Như Hảo' – nhẹ như mây trời 🌸",
-    "🍃 Dễ thương theo cách rất riêng, đôi khi lạnh lùng... nhưng tim ấm áp 🍃",
-    "🌙 NGỦ SỚM, SỐNG KHOA HỌC !!! 🌙",
-    "💫 Và biết không? Sự lạnh lùng ấy lại lung linh hơn cả ngàn vì sao 💫",
-    "🍂 Nên hôm nay, vì một người đặc biệt... 🍂",
-    "🎀 Một điều bất ngờ được tạo nên từ tất cả rung động 🎀",
-    "🥺 Chỉ dành riêng cho bạn... người khiến trái tim này 'hỏng' mất rồi 🥺"
-  ];
+  "✨ Thật ra định nói gì đó hay ho... mà thôi nói đơn giản vậy ✨",
+  "🌸 Có một người tên 'Như Hảo' – nghe tên thôi đã thấy chua cay 🌸",
+  "🍃 Dễ thương theo cách riêng, đôi lúc hơi cọc (chắc đang suy nghĩ chuyện lớn lao) 🍃",
+  "🌙 NGỦ SỚM, SỐNG KHOA HỌC – lời nhắc thân thiện mỗi năm một lần 🌙",
+  "💫 Và thật ra, sự bình tĩnh đó lại khiến người khác để ý nhiều hơn 💫",
+  "🍂 Nên hôm nay, coi như một dịp hợp lý để... 🍂",
+  "🎀 Gửi đến bạn một điều nho nhỏ (gọi là có lòng) 🎀",
+  "😄 Chúc bạn sinh nhật vui vẻ – tuổi mới vẫn là bạn, nhưng phiên bản ổn hơn xíu 😄"
+];
   
   let stepIdx = 0;
   let isTyping = false;
@@ -669,17 +669,19 @@
     popup.style.display = 'flex';
     if (typeInterval) clearInterval(typeInterval);
     
-    const finalMessages = [
-      "🎀 Happy Birthday, Như Hảo! 🎀",
-      "🌷 'Nothing's gonna change my love for you' 🌷",
-      "❄️ Người lạnh lùng nhưng trái tim lại ấm áp đến lạ ❄️",
-      "🍂 Mỗi dòng code này đều viết bằng nỗi nhớ và sự rung động 🍂",
-      "✨ Cậu khiến tôi nhận ra, lạnh lùng cũng là một kiểu dịu dàng ✨",
-      "🌸 Chúc cậu luôn xinh đẹp, bình yên và hạnh phúc rạng ngời 🌸",
-      "💖 Và biết không? Người tạo ra điều này...",
-      "💘 để ý cậu nhiều lắm, nhiều hơn cả ngàn vì sao 💘",
-      "🎂 Chúc mừng sinh nhật, công chúa lạnh lùng 🎂"
-    ];
+   const finalMessages = [
+  "🎀 Happy Birthday, Như Hảo! 🎀",
+  "🌷 Chúc m sinh nhật vui vẻ, ít deadline lại chút cho dễ thở 🌷",
+  "❄️ Nhìn thì lạnh lạnh vậy thôi chứ cũng không phải kiểu khó gần lắm ❄️",
+  "🍂 Nói chung là… cũng có nét riêng nên người ta nhớ 🍂",
+  "✨ Qua Đài Loan chắc không nhẹ nhàng gì, m ráng giữ sức nha ✨",
+  "💪 Vừa học vừa làm thì từ từ thôi, đừng ép bản thân quá 💪",
+  "😴 Thiếu ngủ hoài là xuống sắc thiệt đó, đừng chủ quan 😴",
+  "🍜 Tui thấy m nên ăn uống tử tế lại, đừng để bụng biểu tình 🍜",
+  "💖 Có mấy chuyện không cần nói nhiều, hiểu là được 💖",
+  "😌 Với lại… cũng có người thỉnh thoảng nghĩ tới m thôi 😌",
+  "🎂 Chúc m sinh nhật vui vẻ – mong version mới của m ổn áp hơn 🎂"
+];
     
     let msgIndex = 0;
     finalMsgDiv.innerHTML = "";
